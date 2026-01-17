@@ -1,0 +1,27 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 100px;
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav {
+  display: flex;
+  gap: 32px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #474747;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  padding-bottom: 8px;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-link:hover {
+  color: #C92071;
+  border-bottom-color: #C92071;
+}
