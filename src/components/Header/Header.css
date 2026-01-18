@@ -1,15 +1,120 @@
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px 100px;
   background-color: #FFFFFF;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 100px;
+  gap: 40px;
+}
+
+/* Campo de busca */
+.search-box {
+  flex: 1;
+  max-width: 600px;
+  display: flex;
+  align-items: center;
+  background-color: #F5F5F5;
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  outline: none;
+  color: #474747;
+}
+
+.search-input::placeholder {
+  color: #CCCCCC;
+}
+
+.search-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #8F8F8F;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.search-button:hover {
+  color: #C92071;
+}
+
+/* Área de autenticação */
+.auth-area {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.cadastro-link {
+  color: #474747;
+  text-decoration: underline;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+
+.cadastro-link:hover {
+  color: #C92071;
+}
+
+.entrar-button {
+  background-color: #C92071;
+  color: #FFFFFF;
+  padding: 10px 40px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.entrar-button:hover {
+  background-color: #991956;
+}
+
+/* Carrinho */
+.cart-icon {
+  position: relative;
+  color: #474747;
+  transition: color 0.3s;
+}
+
+.cart-icon:hover {
+  color: #C92071;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #C92071;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: bold;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Navegação */
 .nav {
   display: flex;
   gap: 32px;
+  padding: 16px 100px;
+  border-top: 1px solid #F5F5F5;
 }
 
 .nav-link {
@@ -21,7 +126,8 @@
   border-bottom: 2px solid transparent;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-link.active {
   color: #C92071;
   border-bottom-color: #C92071;
 }

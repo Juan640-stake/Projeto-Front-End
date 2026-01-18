@@ -1,16 +1,252 @@
 .home-page {
+  background-color: #F9F8FE;
+  min-height: 100vh;
+}
+
+/* Hero Banner */
+.hero-banner {
+  background-color: #F5F5F5;
   padding: 60px 100px;
-  text-align: center;
-  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
 }
 
-.home-page h1 {
-  font-size: 48px;
+.hero-content {
+  flex: 1;
+}
+
+.hero-label {
+  color: #F6AA1C;
+  font-size: 14px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.hero-title {
+  font-size: 64px;
+  font-weight: bold;
+  color: #1F1F1F;
+  margin: 0 0 20px 0;
+  line-height: 1.1;
+}
+
+.hero-description {
   color: #474747;
-  margin-bottom: 20px;
+  font-size: 18px;
+  margin-bottom: 30px;
+  line-height: 1.6;
 }
 
-.home-page p {
-  font-size: 18px;
-  color: #8F8F8F;
+.hero-button {
+  background-color: #C92071;
+  color: #FFFFFF;
+  border: none;
+  padding: 16px 60px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.hero-button:hover {
+  background-color: #991956;
+}
+
+.hero-image {
+  flex: 1;
+  position: relative;
+}
+
+.circle-bg {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FFE8F5 0%, #FFF 100%);
+  opacity: 0.5;
+}
+
+.shoe-image {
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+  z-index: 2;
+  transform: rotate(-15deg);
+}
+
+.ornament-circles {
+  position: absolute;
+  right: 40px;
+  bottom: 40px;
+  display: flex;
+  gap: 8px;
+  z-index: 3;
+}
+
+.circle {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #E0E0E0;
+}
+
+.circle.active {
+  background-color: #C92071;
+}
+
+/* Coleções em Destaque */
+.featured-collections {
+  padding: 60px 100px;
+}
+
+.featured-collections h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #474747;
+  margin-bottom: 30px;
+}
+
+.collection-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.collection-card {
+  position: relative;
+  border-radius: 8px;
+  padding: 30px;
+  height: 250px;
+  overflow: hidden;
+}
+
+.card-blue {
+  background-color: #D8E3F2;
+}
+
+.card-purple {
+  background-color: #E2E3FF;
+}
+
+.card-yellow {
+  background-color: #FFE8BC;
+}
+
+.collection-card .discount-badge {
+  background-color: #E7FF86;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #474747;
+  display: inline-block;
+}
+
+.collection-card h3 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #1F1F1F;
+  margin: 16px 0 8px;
+}
+
+.collection-card button {
+  color: #C92071;
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0;
+}
+
+.collection-card img {
+  position: absolute;
+  right: -20px;
+  bottom: -20px;
+  width: 200px;
+  transform: rotate(-25deg);
+}
+
+/* Category Icons */
+.category-icons {
+  padding: 0 100px 60px;
+  text-align: center;
+}
+
+.category-icons h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #474747;
+  margin-bottom: 30px;
+}
+
+.icons-grid {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+}
+
+.icon-item {
+  text-align: center;
+  cursor: pointer;
+}
+
+.icon-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  font-size: 32px;
+  transition: transform 0.3s;
+}
+
+.icon-circle:hover {
+  transform: scale(1.1);
+}
+
+.icon-item p {
+  font-size: 14px;
+  color: #474747;
+  font-weight: 600;
+}
+
+/* Produtos Section */
+.products-section {
+  padding: 60px 100px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.section-header h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #474747;
+}
+
+.ver-todos {
+  color: #C92071;
+  font-size: 16px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.ver-todos:hover {
+  text-decoration: underline;
 }
