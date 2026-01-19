@@ -1,0 +1,40 @@
+.filter-group {
+  margin-bottom: 30px;
+}
+
+.filter-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: #474747;
+  margin-bottom: 16px;
+}
+
+.filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.filter-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #474747;
+}
+
+.filter-input {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  accent-color: #C92071;
+}
+
+.filter-label {
+  user-select: none;
+}
+
+.filter-option:hover .filter-label {
+  color: #C92071;
+}
