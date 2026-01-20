@@ -1,0 +1,251 @@
+.my-orders-page {
+  background-color: #F9F8FE;
+  min-height: 100vh;
+  padding: 60px 100px;
+}
+
+.orders-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.orders-title {
+  font-size: 48px;
+  font-weight: bold;
+  color: #1F1F1F;
+  margin-bottom: 16px;
+}
+
+.orders-subtitle {
+  font-size: 18px;
+  color: #8F8F8F;
+  margin-bottom: 40px;
+}
+
+/* Tabs */
+.orders-tabs {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 40px;
+  border-bottom: 2px solid #CCCCCC;
+}
+
+.tab {
+  background: none;
+  border: none;
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #474747;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+  margin-bottom: -2px;
+}
+
+.tab:hover {
+  color: #C92071;
+}
+
+.tab.active {
+  color: #C92071;
+  border-bottom-color: #C92071;
+}
+
+/* Lista de Pedidos */
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.order-card {
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding: 32px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #F5F5F5;
+}
+
+.order-info h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #1F1F1F;
+  margin-bottom: 8px;
+}
+
+.order-date {
+  font-size: 14px;
+  color: #8F8F8F;
+}
+
+.status-badge {
+  padding: 8px 16px;
+  border-radius: 20px;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Items do Pedido */
+.order-items {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: #F9F8FE;
+  border-radius: 8px;
+}
+
+.order-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.item-info {
+  flex: 1;
+}
+
+.item-info h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1F1F1F;
+  margin-bottom: 4px;
+}
+
+.item-info p {
+  font-size: 14px;
+  color: #8F8F8F;
+}
+
+.item-price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #1F1F1F;
+}
+
+/* Footer do Pedido */
+.order-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 24px;
+  border-top: 1px solid #F5F5F5;
+}
+
+.order-total {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.order-total span {
+  font-size: 14px;
+  color: #8F8F8F;
+}
+
+.order-total strong {
+  font-size: 24px;
+  color: #1F1F1F;
+}
+
+.order-actions {
+  display: flex;
+  gap: 16px;
+}
+
+/* Botões */
+.btn-primary,
+.btn-secondary {
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.btn-primary {
+  background-color: #C92071;
+  color: #FFFFFF;
+}
+
+.btn-primary:hover {
+  background-color: #991956;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: #C92071;
+  border: 2px solid #C92071;
+}
+
+.btn-secondary:hover {
+  background-color: #C92071;
+  color: #FFFFFF;
+}
+
+/* Estado Vazio */
+.empty-state {
+  text-align: center;
+  padding: 80px 40px;
+  background: #FFFFFF;
+  border-radius: 8px;
+}
+
+.empty-state h3 {
+  font-size: 24px;
+  color: #1F1F1F;
+  margin-bottom: 12px;
+}
+
+.empty-state p {
+  font-size: 16px;
+  color: #8F8F8F;
+  margin-bottom: 32px;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .my-orders-page {
+    padding: 40px 20px;
+  }
+
+  .orders-title {
+    font-size: 32px;
+  }
+
+  .order-footer {
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .order-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+  }
+}
