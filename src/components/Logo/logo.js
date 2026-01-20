@@ -1,11 +1,8 @@
+import Logoheader from '../assets/logo.svg';
 function Logo() {
   return (
-    <div style={{
-      fontSize: '32px',
-      fontWeight: 'bold',
-      color: '#C92071'
-    }}>
-      Digital Store
+    <div>
+      <img src={Logoheader} alt="Logo" />
     </div>
   );
 }

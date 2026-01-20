@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Logo from '../Logo/logo';
 import AuthModal from '../Modal/AuthModal';
 import './Header.css';
+import Minicar from '../assets/mini-cart.svg';
+
 
 const Header = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -56,17 +58,16 @@ const Header = () => {
           </div>
 
           {/* Carrinho */}
-          <a href="/carrinho" className="cart-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M9 2L7.17 4H3C1.9 4 1 4.9 1 6V18C1 19.1 1.9 20 3 20H21C22.1 20 23 19.1 23 18V6C23 4.9 22.1 4 21 4H16.83L15 2H9ZM12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7Z" fill="currentColor"/>
-            </svg>
+          <a href="" className="cart-icon">
+            
+            <img src={Minicar} alt="Carrinho" />
             <span className="cart-count">2</span>
           </a>
         </div>
 
         {/* Navegação */}
         <nav className="nav">
-          <a href="/" className="nav-link active">Home</a>
+          <a className="nav-link active">Home</a>
           <a href="/produtos" className="nav-link">Produtos</a>
           <a href="/categorias" className="nav-link">Categorias</a>
           <a href="/meus-pedidos" className="nav-link">Meus Pedidos</a>
