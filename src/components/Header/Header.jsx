@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Logo from '../Logo/logo';
 import AuthModal from '../Modal/AuthModal';
 import './Header.css';
@@ -58,19 +59,18 @@ const Header = () => {
           </div>
 
           {/* Carrinho */}
-          <a href="" className="cart-icon">
-            
+          <Link to="/carrinho" className="cart-icon">
             <img src={Minicar} alt="Carrinho" />
             <span className="cart-count">2</span>
-          </a>
+          </Link>
         </div>
 
         {/* Navegação */}
         <nav className="nav">
-          <a className="nav-link active">Home</a>
-          <a href="/produtos" className="nav-link">Produtos</a>
-          <a href="/categorias" className="nav-link">Categorias</a>
-          <a href="/meus-pedidos" className="nav-link">Meus Pedidos</a>
+          <Link to="/" className="nav-link active">Home</Link>
+          <Link to="/produtos" className="nav-link">Produtos</Link>
+          <Link to="/categorias" className="nav-link">Categorias</Link>
+          <Link to="/meus-pedidos" className="nav-link">Meus Pedidos</Link>
         </nav>
       </header>
 
