@@ -1,0 +1,127 @@
+.gallery {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-container {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.gallery-slides {
+  display: flex;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.gallery-slide {
+  min-width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.gallery-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Conteúdo sobre o slide */
+.slide-content {
+  position: absolute;
+  top: 50%;
+  left: 100px;
+  transform: translateY(-50%);
+  z-index: 2;
+  max-width: 600px;
+}
+
+/* Botões de navegação */
+.gallery-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 3;
+  color: #474747;
+}
+
+.gallery-button:hover {
+  background-color: #FFFFFF;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.gallery-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.gallery-button.prev {
+  left: 20px;
+}
+
+.gallery-button.next {
+  right: 20px;
+}
+
+/* Indicadores */
+.gallery-indicators {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 3;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.indicator.active {
+  background-color: #C92071;
+  width: 32px;
+  border-radius: 6px;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .gallery-container {
+    height: 400px;
+  }
+
+  .slide-content {
+    left: 20px;
+    right: 20px;
+    max-width: none;
+  }
+
+  .gallery-button {
+    width: 40px;
+    height: 40px;
+  }
+}

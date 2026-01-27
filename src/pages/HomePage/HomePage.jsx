@@ -1,8 +1,77 @@
 import React from 'react';
 import ProductListing from '../../components/ProductListing/ProductListing';
+import Gallery from '../../components/Gallery/Gallery';
 import './HomePage.css';
 
 const HomePage = () => {
+  // Dados do banner carrossel
+  const bannerImages = [
+    {
+      src: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=1400&h=600&fit=crop",
+      alt: "Nike Air Force",
+      content: (
+        <div>
+          <span style={{ color: '#F6AA1C', fontSize: '14px', fontWeight: 'bold', display: 'block', marginBottom: '12px' }}>
+            Melhores ofertas personalizadas
+          </span>
+          <h1 style={{ fontSize: '64px', fontWeight: 'bold', color: '#1F1F1F', margin: '0 0 20px 0', lineHeight: '1.1' }}>
+            Queima de<br/>estoque Nike 🔥
+          </h1>
+          <p style={{ color: '#474747', fontSize: '18px', marginBottom: '30px' }}>
+            Consequat culpa exercitation mollit nisi excepteur do<br/>
+            do tempor laboris eiusmod irure consectetur.
+          </p>
+          <button style={{ backgroundColor: '#C92071', color: '#FFFFFF', border: 'none', padding: '16px 60px', fontSize: '16px', fontWeight: 'bold', borderRadius: '8px', cursor: 'pointer' }}>
+            Ver Ofertas
+          </button>
+        </div>
+      )
+    },
+    {
+      src: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=1400&h=600&fit=crop",
+      alt: "Adidas Collection",
+      content: (
+        <div>
+          <span style={{ color: '#F6AA1C', fontSize: '14px', fontWeight: 'bold', display: 'block', marginBottom: '12px' }}>
+            Nova Coleção
+          </span>
+          <h1 style={{ fontSize: '64px', fontWeight: 'bold', color: '#1F1F1F', margin: '0 0 20px 0', lineHeight: '1.1' }}>
+            Adidas<br/>Originals ⚡
+          </h1>
+          <p style={{ color: '#474747', fontSize: '18px', marginBottom: '30px' }}>
+            Estilo clássico com conforto moderno.<br/>
+            Descubra a nova linha Adidas.
+          </p>
+          <button style={{ backgroundColor: '#C92071', color: '#FFFFFF', border: 'none', padding: '16px 60px', fontSize: '16px', fontWeight: 'bold', borderRadius: '8px', cursor: 'pointer' }}>
+            Explorar
+          </button>
+        </div>
+      )
+    },
+    {
+      src: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=1400&h=600&fit=crop",
+      alt: "Supreme Drop",
+      content: (
+        <div>
+          <span style={{ color: '#F6AA1C', fontSize: '14px', fontWeight: 'bold', display: 'block', marginBottom: '12px' }}>
+            Lançamento Exclusivo
+          </span>
+          <h1 style={{ fontSize: '64px', fontWeight: 'bold', color: '#1F1F1F', margin: '0 0 20px 0', lineHeight: '1.1' }}>
+            Supreme<br/>Collection 🔥
+          </h1>
+          <p style={{ color: '#474747', fontSize: '18px', marginBottom: '30px' }}>
+            Peças limitadas da nova coleção Supreme.<br/>
+            Não perca esta oportunidade única.
+          </p>
+          <button style={{ backgroundColor: '#C92071', color: '#FFFFFF', border: 'none', padding: '16px 60px', fontSize: '16px', fontWeight: 'bold', borderRadius: '8px', cursor: 'pointer' }}>
+            Comprar Agora
+          </button>
+        </div>
+      )
+    }
+  ];
+
+  // Dados dos produtos
   const featuredProducts = [
     {
       name: "K-Swiss V8 - Masculino",
@@ -54,32 +123,9 @@ const HomePage = () => {
 
   return (
     <div className="home-page">
-      {/* Hero Banner */}
-      <section className="hero-banner">
-        <div className="hero-content">
-          <span className="hero-label">Melhores ofertas personalizadas</span>
-          <h1 className="hero-title">Queima de<br/>estoque Nike 🔥</h1>
-          <p className="hero-description">
-            Consequat culpa exercitation mollit nisi excepteur do<br/>
-            do tempor laboris eiusmod irure consectetur.
-          </p>
-          <button className="hero-button">Ver Ofertas</button>
-        </div>
-        
-        <div className="hero-image">
-          <div className="circle-bg"></div>
-          <img 
-            src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600" 
-            alt="Nike Shoe"
-            className="shoe-image"
-          />
-          <div className="ornament-circles">
-            <span className="circle active"></span>
-            <span className="circle"></span>
-            <span className="circle"></span>
-            <span className="circle"></span>
-          </div>
-        </div>
+      {/* Banner Carrossel Automático */}
+      <section style={{ padding: '0' }}>
+        <Gallery images={bannerImages} autoPlay={true} interval={4000} />
       </section>
 
       {/* Coleções em Destaque - Cards */}

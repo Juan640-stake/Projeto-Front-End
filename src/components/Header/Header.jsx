@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Logo from '../Logo/logo';
 import AuthModal from '../Modal/AuthModal';
 import './Header.css';
-import Minicar from '../assets/mini-cart.svg';
-
 
 const Header = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -58,19 +56,48 @@ const Header = () => {
             </button>
           </div>
 
-          {/* Carrinho */}
-          <Link to="/carrinho" className="cart-icon">
-            <img src={Minicar} alt="Carrinho" />
+          {/* Carrinho - SVG INLINE */}
+          <NavLink to="/carrinho" className="cart-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <path d="M11 27C11 28.1046 10.1046 29 9 29C7.89543 29 7 28.1046 7 27C7 25.8954 7.89543 25 9 25C10.1046 25 11 25.8954 11 27Z" fill="currentColor"/>
+              <path d="M25 27C25 28.1046 24.1046 29 23 29C21.8954 29 21 28.1046 21 27C21 25.8954 21.8954 25 23 25C24.1046 25 25 25.8954 25 27Z" fill="currentColor"/>
+              <path d="M7.5 7L9.5 19H24.5L28.5 7H7.5Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M4 4H6.5L7.5 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
             <span className="cart-count">2</span>
-          </Link>
+          </NavLink>
         </div>
 
         {/* Navegação */}
         <nav className="nav">
-          <Link to="/" className="nav-link active">Home</Link>
-          <Link to="/produtos" className="nav-link">Produtos</Link>
-          <Link to="/categorias" className="nav-link">Categorias</Link>
-          <Link to="/meus-pedidos" className="nav-link">Meus Pedidos</Link>
+          <NavLink 
+            to="/" 
+            className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+            end
+          >
+            Home
+          </NavLink>
+          
+          <NavLink 
+            to="/produtos" 
+            className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+          >
+            Produtos
+          </NavLink>
+          
+          <NavLink 
+            to="/categorias" 
+            className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+          >
+            Categorias
+          </NavLink>
+          
+          <NavLink 
+            to="/meus-pedidos" 
+            className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}
+          >
+            Meus Pedidos
+          </NavLink>
         </nav>
       </header>
 
