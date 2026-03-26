@@ -36,8 +36,9 @@ export default function AuthModal({ isOpen, onClose, mode, setMode }) {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-container" onClick={(e) => e.stopPropagation()}>
-        {/* Close Button */}
-        <button onClick={onClose} className="modal-close">
+        
+        {/* Botão fechar */}
+        <button onClick={onClose} className="modal-close" type="button">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
           </svg>
@@ -53,6 +54,7 @@ export default function AuthModal({ isOpen, onClose, mode, setMode }) {
               ? 'Novo cliente? Então registre-se ' 
               : 'Já tem uma conta? '}
             <button 
+              type="button"
               onClick={() => setMode(mode === 'login' ? 'register' : 'login')}
               className="modal-switch-button"
             >
@@ -63,14 +65,12 @@ export default function AuthModal({ isOpen, onClose, mode, setMode }) {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="modal-form">
+
           {mode === 'register' && (
             <>
               <div className="form-group">
                 <label className="form-label">Nome Completo *</label>
                 <div className="input-wrapper">
-                  <svg className="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                  </svg>
                   <input
                     type="text"
                     name="name"
@@ -103,10 +103,6 @@ export default function AuthModal({ isOpen, onClose, mode, setMode }) {
               {mode === 'login' ? 'Login *' : 'Email *'}
             </label>
             <div className="input-wrapper">
-              <svg className="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" strokeWidth="2"/>
-                <path d="M22 6L12 13L2 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-              </svg>
               <input
                 type="email"
                 name="email"
@@ -123,9 +119,6 @@ export default function AuthModal({ isOpen, onClose, mode, setMode }) {
             <div className="form-group">
               <label className="form-label">Celular *</label>
               <div className="input-wrapper">
-                <svg className="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                  <path d="M22 16.92V19.92C22 20.4696 21.5304 20.92 21 20.92H18C8.61116 20.92 1 13.3088 1 3.92C1 3.37041 1.44957 2.92 1.99917 2.92H5C5.55228 2.92 6 3.36772 6 3.92V7.92C6 8.47228 5.55228 8.92 5 8.92H4C4 14.4429 8.47715 18.92 14 18.92V17.92C14 17.3677 14.4477 16.92 15 16.92H19C19.5523 16.92 20 17.3677 20 17.92" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
                 <input
                   type="tel"
                   name="phone"
@@ -142,10 +135,6 @@ export default function AuthModal({ isOpen, onClose, mode, setMode }) {
           <div className="form-group">
             <label className="form-label">Senha *</label>
             <div className="input-wrapper">
-              <svg className="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <path d="M19 11H5C3.89543 11 3 11.8954 3 13V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V13C21 11.8954 20.1046 11 19 11Z" stroke="currentColor" strokeWidth="2"/>
-                <path d="M7 11V7C7 5.67392 7.52678 4.40215 8.46447 3.46447C9.40215 2.52678 10.6739 2 12 2C13.3261 2 14.5979 2.52678 15.5355 3.46447C16.4732 4.40215 17 5.67392 17 7V11" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-              </svg>
               <input
                 type="password"
                 name="password"
@@ -165,7 +154,11 @@ export default function AuthModal({ isOpen, onClose, mode, setMode }) {
                 <input type="checkbox" className="checkbox-input" />
                 <span>Lembrar-me</span>
               </label>
-              <a href="#" className="forgot-password">Esqueci minha senha</a>
+
+              {/* ✅ corrigido */}
+              <button type="button" className="forgot-password">
+                Esqueci minha senha
+              </button>
             </div>
           )}
 
@@ -173,7 +166,7 @@ export default function AuthModal({ isOpen, onClose, mode, setMode }) {
             <label className="checkbox-label-full">
               <input type="checkbox" required className="checkbox-input" />
               <span className="checkbox-text">
-                Quero receber por email ofertas e novidades das lojas da Digital Store. A frequência de envios pode variar de acordo com a interação do cliente.
+                Quero receber por email ofertas e novidades.
               </span>
             </label>
           )}
@@ -183,7 +176,7 @@ export default function AuthModal({ isOpen, onClose, mode, setMode }) {
           </button>
         </form>
 
-        {/* Social Login (apenas no modo login) */}
+        {/* Social Login */}
         {mode === 'login' && (
           <div className="social-login">
             <div className="divider">
@@ -191,17 +184,19 @@ export default function AuthModal({ isOpen, onClose, mode, setMode }) {
             </div>
             
             <div className="social-buttons">
-              <button className="social-button">
+              <button className="social-button" type="button">
                 <img src="https://www.google.com/favicon.ico" alt="Google" />
                 <span>Google</span>
               </button>
-              <button className="social-button">
+
+              <button className="social-button" type="button">
                 <img src="https://www.facebook.com/favicon.ico" alt="Facebook" />
                 <span>Facebook</span>
               </button>
             </div>
           </div>
         )}
+
       </div>
     </div>
   );
