@@ -50,7 +50,7 @@ export default function AuthModal({ isOpen, onClose, mode, setMode }) {
             {mode === 'login' ? 'Acesse sua conta' : 'Criar conta'}
           </h2>
           <p className="modal-subtitle">
-            {mode === 'login' 
+            {mode === 'login'
               ? 'Novo cliente? Então registre-se ' 
               : 'Já tem uma conta? '}
             <button 
