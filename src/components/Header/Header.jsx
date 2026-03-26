@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Logo from '../Logo/logo';
 import AuthModal from '../Modal/AuthModal';
 import './Header.css';
 import Minicar from '../assets/mini-cart.svg';
 
 const Header = () => {
+  const { pathname } = useLocation();
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [authMode, setAuthMode] = useState('login');
 
@@ -45,7 +47,6 @@ const Header = () => {
             </button>
           </div>
 
-          {/* ✅ corrigido */}
           <a href="/carrinho" className="cart-icon">
             <img src={Minicar} alt="Carrinho" />
             <span className="cart-count">2</span>
@@ -53,11 +54,10 @@ const Header = () => {
         </div>
 
         <nav className="nav">
-          {/* ✅ TODOS com href válido */}
-          <a href="/" className="nav-link active">Home</a>
-          <a href="/produtos" className="nav-link">Produtos</a>
-          <a href="/categorias" className="nav-link">Categorias</a>
-          <a href="/meus-pedidos" className="nav-link">Meus Pedidos</a>
+          <a href="/" className={`nav-link ${pathname === '/' ? 'active' : ''}`}>Home</a>
+          <a href="/produtos" className={`nav-link ${pathname === '/produtos' ? 'active' : ''}`}>Produtos</a>
+          <a href="/categorias" className={`nav-link ${pathname === '/categorias' ? 'active' : ''}`}>Categorias</a>
+          <a href="/meus-pedidos" className={`nav-link ${pathname === '/meus-pedidos' ? 'active' : ''}`}>Meus Pedidos</a>
         </nav>
       </header>
 
