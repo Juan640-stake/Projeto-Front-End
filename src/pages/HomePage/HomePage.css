@@ -95,6 +95,7 @@
   height: 8px;
   border-radius: 50%;
   background-color: #E0E0E0;
+  cursor: pointer;
 }
 
 .circle.active {
@@ -127,17 +128,9 @@
   overflow: hidden;
 }
 
-.card-blue {
-  background-color: #D8E3F2;
-}
-
-.card-purple {
-  background-color: #E2E3FF;
-}
-
-.card-yellow {
-  background-color: #FFE8BC;
-}
+.card-blue { background-color: #D8E3F2; }
+.card-purple { background-color: #E2E3FF; }
+.card-yellow { background-color: #FFE8BC; }
 
 .collection-card .discount-badge {
   background-color: #E7FF86;
@@ -191,6 +184,7 @@
   display: flex;
   justify-content: center;
   gap: 60px;
+  flex-wrap: wrap;
 }
 
 .icon-item {
@@ -212,9 +206,7 @@
   transition: transform 0.3s;
 }
 
-.icon-circle:hover {
-  transform: scale(1.1);
-}
+.icon-circle:hover { transform: scale(1.1); }
 
 .icon-item p {
   font-size: 14px;
@@ -247,6 +239,49 @@
   font-weight: 600;
 }
 
-.ver-todos:hover {
-  text-decoration: underline;
+.ver-todos:hover { text-decoration: underline; }
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 1024px) {
+  .hero-banner {
+    padding: 40px 40px;
+    gap: 30px;
+  }
+  .hero-title { font-size: 48px; }
+  .featured-collections,
+  .products-section { padding: 40px 40px; }
+  .category-icons { padding: 0 40px 40px; }
+  .icons-grid { gap: 30px; }
+}
+
+@media (max-width: 768px) {
+  .hero-banner {
+    flex-direction: column;
+    padding: 40px 24px;
+    text-align: center;
+    gap: 20px;
+  }
+  .hero-title { font-size: 36px; }
+  .hero-description { font-size: 15px; }
+  .hero-image { width: 100%; }
+  .circle-bg { width: 300px; height: 300px; }
+  .shoe-image { max-width: 280px; margin: 0 auto; display: block; }
+  .ornament-circles { right: 50%; transform: translateX(50%); bottom: -10px; }
+
+  .featured-collections,
+  .products-section { padding: 30px 24px; }
+  .category-icons { padding: 0 24px 30px; }
+
+  .collection-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .icons-grid { gap: 20px; }
+  .icon-circle { width: 60px; height: 60px; font-size: 24px; }
+}
+
+@media (max-width: 480px) {
+  .hero-title { font-size: 28px; }
+  .hero-button { padding: 14px 40px; font-size: 14px; }
+  .collection-card h3 { font-size: 22px; }
 }
