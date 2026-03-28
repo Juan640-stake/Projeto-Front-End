@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ProductListing from '../../components/ProductListing/ProductListing';
+import { getProducts, getCategories } from '../../services/api';
 import './HomePage.css';
 
 const slides = [
@@ -27,6 +28,9 @@ const slides = [
 
 const HomePage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -35,16 +39,32 @@ const HomePage = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const featuredProducts = [
-    { name: "K-Swiss V8 - Masculino", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop", price: "200", priceDiscount: "100" },
-    { name: "K-Swiss V8 - Masculino", image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&h=400&fit=crop", price: "200", priceDiscount: "100" },
-    { name: "K-Swiss V8 - Masculino", image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400&h=400&fit=crop", price: "200", priceDiscount: "100" },
-    { name: "K-Swiss V8 - Masculino", image: "https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=400&h=400&fit=crop", price: "200" },
-    { name: "K-Swiss V8 - Masculino", image: "https://images.unsplash.com/photo-1514989940723-e8e51635b782?w=400&h=400&fit=crop", price: "200", priceDiscount: "100" },
-    { name: "K-Swiss V8 - Masculino", image: "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=400&h=400&fit=crop", price: "200", priceDiscount: "100" },
-    { name: "K-Swiss V8 - Masculino", image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=400&fit=crop", price: "200" },
-    { name: "K-Swiss V8 - Masculino", image: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=400&h=400&fit=crop", price: "200", priceDiscount: "100" }
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [productsData, categoriesData] = await Promise.all([
+          getProducts({ limit: 8, page: 1 }),
+          getCategories({ limit: -1, use_in_menu: true }),
+        ]);
+        setProducts(productsData.data || []);
+        setCategories(categoriesData.data || []);
+      } catch (error) {
+        console.error('Erro ao buscar dados:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // Formata produtos para o formato que o ProductListing espera
+  const formattedProducts = products.map((product) => ({
+    name: product.name,
+    image: product.images?.[0]?.content || 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop',
+    price: String(product.price),
+    priceDiscount: product.price_with_discount ? String(product.price_with_discount) : undefined,
+  }));
 
   return (
     <div className="home-page">
@@ -63,10 +83,10 @@ const HomePage = () => {
           </p>
           <button className="hero-button">Ver Ofertas</button>
         </div>
-        
+
         <div className="hero-image">
           <div className="circle-bg"></div>
-          <img 
+          <img
             src={slides[currentSlide].image}
             alt="Produto"
             className="shoe-image"
@@ -108,15 +128,26 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Coleções - Ícones */}
+      {/* Categorias dinâmicas da API */}
       <section className="category-icons">
         <h3>Coleções em destaque</h3>
         <div className="icons-grid">
-          <div className="icon-item"><div className="icon-circle">👕</div><p>Camisetas</p></div>
-          <div className="icon-item"><div className="icon-circle">👖</div><p>Calças</p></div>
-          <div className="icon-item"><div className="icon-circle">🧢</div><p>Bonés</p></div>
-          <div className="icon-item"><div className="icon-circle">🎧</div><p>Headphones</p></div>
-          <div className="icon-item"><div className="icon-circle">👟</div><p>Tênis</p></div>
+          {categories.length > 0 ? (
+            categories.map((cat) => (
+              <div className="icon-item" key={cat.id}>
+                <div className="icon-circle">🏷️</div>
+                <p>{cat.name}</p>
+              </div>
+            ))
+          ) : (
+            <>
+              <div className="icon-item"><div className="icon-circle">👕</div><p>Camisetas</p></div>
+              <div className="icon-item"><div className="icon-circle">👖</div><p>Calças</p></div>
+              <div className="icon-item"><div className="icon-circle">🧢</div><p>Bonés</p></div>
+              <div className="icon-item"><div className="icon-circle">🎧</div><p>Headphones</p></div>
+              <div className="icon-item"><div className="icon-circle">👟</div><p>Tênis</p></div>
+            </>
+          )}
         </div>
       </section>
 
@@ -126,7 +157,14 @@ const HomePage = () => {
           <h2>Produtos em alta</h2>
           <a href="/produtos" className="ver-todos">Ver todos →</a>
         </div>
-        <ProductListing products={featuredProducts} />
+        {loading ? (
+          <p>Carregando produtos...</p>
+        ) : (
+          <ProductListing products={formattedProducts.length > 0 ? formattedProducts : [
+            { name: "K-Swiss V8 - Masculino", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop", price: "200", priceDiscount: "100" },
+            { name: "K-Swiss V8 - Masculino", image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&h=400&fit=crop", price: "200", priceDiscount: "100" },
+          ]} />
+        )}
       </section>
     </div>
   );
