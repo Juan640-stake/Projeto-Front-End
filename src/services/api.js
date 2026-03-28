@@ -1,4 +1,4 @@
-const API_URL = 'https://projeto-back-end-production.up.railway.app';
+const API_URL = 'https://projeto-back-end-production.up.railway.app/v1/category/search';
 
 // ========== USUÁRIOS ==========
 
