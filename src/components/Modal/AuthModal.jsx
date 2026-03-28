@@ -1,42 +1,81 @@
 import React, { useState } from 'react';
+import { loginUser, createUser } from '../../services/api';
 import './AuthModal.css';
 
 export default function AuthModal({ isOpen, onClose, mode, setMode }) {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    name: '',
+    confirmPassword: '',
+    firstname: '',
+    surname: '',
     cpf: '',
     phone: ''
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    if (mode === 'login') {
-      console.log('Login:', formData);
-      alert('Login realizado com sucesso!');
-    } else {
-      console.log('Cadastro:', formData);
-      alert('Cadastro realizado com sucesso!');
+    setError('');
+    setLoading(true);
+
+    try {
+      if (mode === 'login') {
+        const res = await loginUser(formData.email, formData.password);
+
+        if (res.token) {
+          localStorage.setItem('token', res.token);
+          alert('Login realizado com sucesso!');
+          onClose();
+        } else {
+          setError('Email ou senha incorretos.');
+        }
+
+      } else {
+        const nameParts = formData.firstname.trim().split(' ');
+        const firstname = nameParts[0];
+        const surname = nameParts.slice(1).join(' ') || firstname;
+
+        if (formData.password !== formData.confirmPassword) {
+          setError('As senhas não coincidem.');
+          setLoading(false);
+          return;
+        }
+
+        const res = await createUser({
+          firstname,
+          surname,
+          email: formData.email,
+          password: formData.password,
+          confirmPassword: formData.confirmPassword,
+        });
+
+        if (res.message === 'Usuário criado com sucesso.') {
+          alert('Cadastro realizado com sucesso! Faça login.');
+          setMode('login');
+        } else {
+          setError(res.message || 'Erro ao cadastrar. Tente novamente.');
+        }
+      }
+    } catch (err) {
+      setError('Erro ao conectar com o servidor.');
+    } finally {
+      setLoading(false);
     }
-    
-    onClose();
   };
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setError('');
   };
 
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-container" onClick={(e) => e.stopPropagation()}>
-        
+
         {/* Botão fechar */}
         <button onClick={onClose} className="modal-close" type="button">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -50,18 +89,23 @@ export default function AuthModal({ isOpen, onClose, mode, setMode }) {
             {mode === 'login' ? 'Acesse sua conta' : 'Criar conta'}
           </h2>
           <p className="modal-subtitle">
-            {mode === 'login'
-              ? 'Novo cliente? Então registre-se ' 
-              : 'Já tem uma conta? '}
-            <button 
+            {mode === 'login' ? 'Novo cliente? Então registre-se ' : 'Já tem uma conta? '}
+            <button
               type="button"
-              onClick={() => setMode(mode === 'login' ? 'register' : 'login')}
+              onClick={() => { setMode(mode === 'login' ? 'register' : 'login'); setError(''); }}
               className="modal-switch-button"
             >
               {mode === 'login' ? 'aqui' : 'Entre aqui'}
             </button>
           </p>
         </div>
+
+        {/* Erro */}
+        {error && (
+          <div style={{ color: 'red', marginBottom: '12px', fontSize: '14px', textAlign: 'center' }}>
+            {error}
+          </div>
+        )}
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="modal-form">
@@ -70,17 +114,15 @@ export default function AuthModal({ isOpen, onClose, mode, setMode }) {
             <>
               <div className="form-group">
                 <label className="form-label">Nome Completo *</label>
-                <div className="input-wrapper">
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Insira seu nome"
-                    required
-                    className="form-input"
-                  />
-                </div>
+                <input
+                  type="text"
+                  name="firstname"
+                  value={formData.firstname}
+                  onChange={handleChange}
+                  placeholder="Insira seu nome completo"
+                  required
+                  className="form-input"
+                />
               </div>
 
               <div className="form-group">
@@ -102,51 +144,61 @@ export default function AuthModal({ isOpen, onClose, mode, setMode }) {
             <label className="form-label">
               {mode === 'login' ? 'Login *' : 'Email *'}
             </label>
-            <div className="input-wrapper">
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Insira seu email"
-                required
-                className="form-input"
-              />
-            </div>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Insira seu email"
+              required
+              className="form-input"
+            />
           </div>
 
           {mode === 'register' && (
             <div className="form-group">
               <label className="form-label">Celular *</label>
-              <div className="input-wrapper">
-                <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  placeholder="(85) 98765-4321"
-                  required
-                  className="form-input"
-                />
-              </div>
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="(85) 98765-4321"
+                required
+                className="form-input"
+              />
             </div>
           )}
 
           <div className="form-group">
             <label className="form-label">Senha *</label>
-            <div className="input-wrapper">
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Insira sua senha"
+              required
+              minLength={6}
+              className="form-input"
+            />
+          </div>
+
+          {mode === 'register' && (
+            <div className="form-group">
+              <label className="form-label">Confirmar Senha *</label>
               <input
                 type="password"
-                name="password"
-                value={formData.password}
+                name="confirmPassword"
+                value={formData.confirmPassword}
                 onChange={handleChange}
-                placeholder="Insira sua senha"
+                placeholder="Confirme sua senha"
                 required
                 minLength={6}
                 className="form-input"
               />
             </div>
-          </div>
+          )}
 
           {mode === 'login' && (
             <div className="form-options">
@@ -154,8 +206,6 @@ export default function AuthModal({ isOpen, onClose, mode, setMode }) {
                 <input type="checkbox" className="checkbox-input" />
                 <span>Lembrar-me</span>
               </label>
-
-              {/* ✅ corrigido */}
               <button type="button" className="forgot-password">
                 Esqueci minha senha
               </button>
@@ -171,8 +221,8 @@ export default function AuthModal({ isOpen, onClose, mode, setMode }) {
             </label>
           )}
 
-          <button type="submit" className="submit-button">
-            {mode === 'login' ? 'Acessar Conta' : 'Criar Conta'}
+          <button type="submit" className="submit-button" disabled={loading}>
+            {loading ? 'Aguarde...' : mode === 'login' ? 'Acessar Conta' : 'Criar Conta'}
           </button>
         </form>
 
@@ -182,13 +232,11 @@ export default function AuthModal({ isOpen, onClose, mode, setMode }) {
             <div className="divider">
               <span>Ou continue com</span>
             </div>
-            
             <div className="social-buttons">
               <button className="social-button" type="button">
                 <img src="https://www.google.com/favicon.ico" alt="Google" />
                 <span>Google</span>
               </button>
-
               <button className="social-button" type="button">
                 <img src="https://www.facebook.com/favicon.ico" alt="Facebook" />
                 <span>Facebook</span>
